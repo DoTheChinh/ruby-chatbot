@@ -8,7 +8,7 @@ Bot.on :message do |message|
       attachment: {
         type: 'image',
         payload: {
-          url: GifFinder.gif_url
+          url: GifFinder.new.gif_by_tag
         }
       }
     )
