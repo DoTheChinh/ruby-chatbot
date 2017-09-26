@@ -2,7 +2,8 @@ module ApiAi
   class OutputGenerator
     ACTION_HANDLERS = {
       default: ActionHandlers::DefaultOutput,
-      create_todo: ActionHandlers::TodoCreate
+      create_todo: ActionHandlers::TodoCreate,
+      index_todos: ActionHandlers::TodoIndex
     }.freeze
 
     def initialize parsed_response
