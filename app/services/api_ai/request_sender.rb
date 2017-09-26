@@ -26,12 +26,15 @@ module ApiAi
     end
 
     def perform_request
-      @response ||= HTTP.auth("Bearer #{ENV['API_AI_CLIENT_ACCESS_TOKEN']}").get("#{ENV['API_AI_URL']}query", params: @params).parse
-      #to symbolize keys use JSON.parse(symbolize_names: true)
+      unless @response.present?
+        response = HTTP.auth("Bearer #{ENV['API_AI_CLIENT_ACCESS_TOKEN']}").get("#{ENV['API_AI_URL']}query", params: @params)
+        @response = JSON.parse(response, symbolize_names: true)
+      end
+      @response
     end
 
     def bad_request?
-      !@response.dig('status', 'code').to_s.start_with? '2'
+      !@response.dig(:status, :code).to_s.start_with? '2'
     end
   end
 end
