@@ -6,8 +6,8 @@ Bot.on :message do |message|
 
   api_ai_response = ApiAi::RequestSender.new(session_id: message.sender['id'], query: message.text).call
   parsed_response = ApiAi::ResponseParser.new(api_ai_response).call
-  # output = ApiAi::OutputGenerator.new(parsed_response).call
-  # message.reply output
+  output = ApiAi::OutputGenerator.new(parsed_response).call
+  message.reply output
 
   # if message.text.end_with? '?'
   #   message.typing_on
