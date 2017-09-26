@@ -32,8 +32,7 @@ class StackFinder
   end
 
   def search_results
-    byebug
-    HTTP.use(:auto_inflate).headers('Accept-Encoding' => 'gzip').get(search_url).parse.dig('items') #TODO: json parser fails at 882 because of a blank line (WTF???)
+    @search_results ||= parsed_get_request(search_url).parse.dig('items')
   end
 
   def closed? result_item
@@ -44,12 +43,16 @@ class StackFinder
     result_item.dig('accepted_answer_id')
   end
 
-  #TODO: Parse markdown to plain text with this gem: https://github.com/vmg/redcarpet
+  #TODO: Parse markdown to plain text, gem: https://github.com/vmg/redcarpet
   def parse_answer
-    answer = HTTP.use(:auto_inflate).headers('Accept-Encoding' => 'gzip').get(answer_url).parse.dig('items').first
+    answer = parsed_get_request(answer_url).parse.dig('items').first
     {
       title: answer.dig('title'),
       body: answer.dig('body_markdown')
     }
+  end
+
+  def parsed_get_request url
+    HTTP.use(:auto_inflate).headers('Accept-Encoding' => 'gzip').get(url)
   end
 end
