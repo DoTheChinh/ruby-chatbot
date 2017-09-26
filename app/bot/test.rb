@@ -6,7 +6,7 @@ Bot.on :message do |message|
     message.typing_on
 
     stack = StackFinder.new message.text
-    stack.find_answer
+    stack.answer
 
     message.reply(
       text: stack.answer.present? ? stack.answer[:body] : "Couldn't find any answers for You, sorry :c"

@@ -4,24 +4,22 @@ class StackFinder
   WORDS_TO_REMOVE = %w{how to can does}.freeze
 
   ANSWER_UR_PREFIX = 'https://api.stackexchange.com/2.2/answers/'.freeze
-  ANSWER_URL_SUFIX = '?order=desc&sort=activity&site=stackoverflow&filter=!-*f(6sFKmjY2'.freeze
+  ANSWER_URL_SUFIX = '?pagesize=100&order=desc&sort=activity&site=stackoverflow&filter=!b0OfNR*gkS.97-'.freeze
 
   def initialize question
     @question = question
     @query = prepare_query
   end
 
-  def find_answer
+  def answer
+    return @answer if @answer.present?
+
     search_results.take_while do |result|
       if result.dig('accepted_answer_id') && !result.dig('closed_date')
         @answer_id = result.dig('accepted_answer_id')
       end
     end
-    parse_answer
-  end
-
-  def answer
-    @answer ||= find_answer
+    @answer = parse_answer
   end
 
   private
@@ -43,7 +41,8 @@ class StackFinder
     answer = parsed_get_request(answer_url).dig('items').first
     {
       title: answer.dig('title'),
-      body: answer.dig('body_markdown')
+      body: answer.dig('body_markdown'),
+      link: answer.dig('link')
     }
   end
 
