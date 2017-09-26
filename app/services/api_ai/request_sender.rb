@@ -27,6 +27,7 @@ module ApiAi
 
     def perform_request
       @response ||= HTTP.auth("Bearer #{ENV['API_AI_CLIENT_ACCESS_TOKEN']}").get("#{ENV['API_AI_URL']}query", params: @params).parse
+      #to symbolize keys use JSON.parse(symbolize_names: true)
     end
 
     def bad_request?

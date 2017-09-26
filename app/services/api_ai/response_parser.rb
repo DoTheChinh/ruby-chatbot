@@ -11,7 +11,7 @@ module ApiAi
         psid: @response.dig('sessionId'),
         output: @response.dig('result', 'fulfillment', 'speech'),
         parameters: @response.dig('result', 'parameters'),
-        action: @response.dig('result', 'action'),
+        action: @response.dig('result', 'action').to_sym,
         action_incomplete: @response.dig('result', 'actionIncomplete')
       }
     end
