@@ -14,7 +14,8 @@ module ApiAi
 
     def default_params
       {
-        lang: 'en'
+        lang: 'en',
+        v: '20170926'
       }
     end
 
