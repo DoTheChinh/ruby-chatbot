@@ -19,7 +19,8 @@ module ActionHandlers
     private
 
     def notify_time
-      @notify_time ||= DateTime.parse time_param
+      @notify_time ||= DateTime.parse "#{time_param} +0200"
+      #TODO: Handle different timezones correctly
     end
 
     def time_given?
