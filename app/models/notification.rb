@@ -1,5 +1,6 @@
 class Notification < ApplicationRecord
   belongs_to :todo
+  delegate :user, to: :todo
 
   validate :notify_in_the_future
 
