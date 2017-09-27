@@ -8,17 +8,4 @@ Bot.on :message do |message|
   parsed_response = ApiAi::ResponseParser.new(api_ai_response).call
   output = ApiAi::OutputGenerator.new(parsed_response).call
   message.reply(output)
-
-  # if message.text.end_with? '?'
-  #   message.typing_on
-  #
-  #   stack = StackFinder.new message.text
-  #   stack.answer
-  #
-  #   message.reply(
-  #     text: stack.answer.present? ? stack.answer[:body] : "Couldn't find any answers for You, sorry :c"
-  #   )
-  # else
-  #   message.reply(text: 'Hi! Ask me some questions please')
-  # end
 end
