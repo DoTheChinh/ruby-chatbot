@@ -45,3 +45,4 @@ gem 'facebook-messenger'
 gem 'figaro'
 
 gem 'http'
+gem 'sidekiq'
