@@ -19,9 +19,7 @@ module ActionHandlers
     private
 
     def notify_time
-       parsed_datetime = DateTime.parse time_param
-
-       @notify_time ||= parsed_datetime
+      @notify_time ||= DateTime.parse time_param
     end
 
     def time_given?
