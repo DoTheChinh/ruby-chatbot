@@ -12,7 +12,7 @@ This is just a sandbox created to play around with api.ai and messenger APIs, ce
 4. Create account on https://api.ai, create new agent and import file `ruby-chatbot-agent.zip`.
 5. Create `config/application.yml` and paste Your tokens and keys from facebook and api.ai into it (template is in `config/application.yml.example`). Remember not to share this file in Your public repos. 
 Detailed overview of required environment variables can be found at: https://github.com/jgorset/facebook-messenger#configuration
-6. Create the database `$ rails db:create`
+6. Create the database `$ rails db:create` and then `$ rails db:migrate`
 
 ### Starting server
 
